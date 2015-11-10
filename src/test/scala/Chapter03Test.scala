@@ -4,6 +4,54 @@ import redbook.Chapter03._
 import redbook.Chapter03.List._
 
 class Chapter03Test extends FlatSpec with Matchers {
+  "drop" should "retrun the same list if f => false" in {
+    val list = List(1, 2, 3, 4, 5, 6, 7)
+
+    dropWhile(list, (x : Int) => false) should be(list)
+  }
+
+  "dropWhile" should "remove the first elements from list" in {
+    val list = List(1, 2, 3, 4, 5, 6, 7)
+
+    dropWhile(list, (x : Int) => x < 4) should be(List(4, 5, 6, 7))
+  }
+
+  "dropWhile" should "return empty list if _ => x <= 7" in {
+    val list = List(1, 2, 3, 4, 5, 6, 7)
+
+    dropWhile(list, (x : Int) => x <= 7) should be(Nil)
+  }
+
+  "dropWhile" should "return Nil on empty list" in {
+    val list = Nil
+
+    dropWhile(list, (x : Int) => true) should be(Nil)
+  }
+
+  "drop" should "retrun the same list if n == 0" in {
+    val list = List(1, 2, 3, 4, 5, 6, 7)
+
+    drop(list, 0) should be(list)
+  }
+
+  "drop" should "remove the first n elements from list" in {
+    val list = List(1, 2, 3, 4, 5, 6, 7)
+
+    drop(list, 3) should be(List(4, 5, 6, 7))
+  }
+
+  "drop" should "return empty list if n == list.size" in {
+    val list = List(1, 2, 3, 4, 5, 6, 7)
+
+    drop(list, 7) should be(Nil)
+  }
+
+  "drop" should "return Nil on empty list" in {
+    val list = Nil
+
+    drop(list, 10) should be(Nil)
+  }
+
   "setHead of an empty list" should "return one element list" in {
     val list = Nil
 

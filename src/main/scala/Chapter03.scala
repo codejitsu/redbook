@@ -1,11 +1,27 @@
 package redbook
 
+import scala.annotation.tailrec
+
 object Chapter03 {
   sealed trait List[+A] // red book list
   case object Nil extends List[Nothing]
   case class Cons[+A](head: A, tail: List[A]) extends List[A]
 
   object List {
+    @tailrec
+    def dropWhile[A](l: List[A], f: A => Boolean): List[A] = l match {
+      case Nil => Nil
+      case Cons(x, xs) if (f(x)) => dropWhile(xs, f)
+      case l @ Cons(_, _) => l
+    }
+
+    @tailrec
+    def drop[A](l: List[A], n: Int): List[A] = l match {
+      case Nil => Nil
+      case _ if n == 0 => l
+      case Cons(_, xs) => drop(xs, n - 1)
+    }
+
     def setHead[A](list: List[A], h: A): List[A] = list match {
       case Nil => List(h)
       case Cons(_, t) => Cons(h, t)
