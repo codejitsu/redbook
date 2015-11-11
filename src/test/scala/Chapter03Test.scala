@@ -4,6 +4,18 @@ import redbook.Chapter03._
 import redbook.Chapter03.List._
 
 class Chapter03Test extends FlatSpec with Matchers {
+  "init" should "return list without last element" in {
+    init(List(1, 2, 3, 4, 5)) should be (List(1, 2, 3, 4))
+  }
+
+  "init" should "return Nil on one element list" in {
+    init(List(1)) should be (Nil)
+  }
+
+  "init" should "return Nil on empty list" in {
+    init(Nil) should be (Nil)
+  }
+
   "drop" should "retrun the same list if f => false" in {
     val list = List(1, 2, 3, 4, 5, 6, 7)
 

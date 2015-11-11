@@ -8,6 +8,11 @@ object Chapter03 {
   case class Cons[+A](head: A, tail: List[A]) extends List[A]
 
   object List {
+    def init[A](l: List[A]): List[A] = l match {
+      case Nil | Cons(_, Nil) => Nil
+      case Cons(x, xs) => Cons(x, init(xs))
+    }
+
     @tailrec
     def dropWhile[A](l: List[A], f: A => Boolean): List[A] = l match {
       case Nil => Nil
