@@ -4,6 +4,26 @@ import redbook.Chapter03._
 import redbook.Chapter03.List._
 
 class Chapter03Test extends FlatSpec with Matchers {
+  "foldLeft" should "be tail recursive: nonempty list" in {
+    val len = foldLeft(List(1, 2, 3, 4, 5), 0)((i, _) => i + 1)
+
+    len should be (5)
+  }
+
+  "foldLeft" should "be tail recursive: empty list" in {
+    val len = foldLeft[Int, Int](Nil, 0)((i, _) => i + 1)
+
+    len should be (0)
+  }
+
+  "length" should "return an integer for an nonempty list" in {
+    listLength(List(1, 2, 3, 4, 5)) should be (5)
+  }
+
+  "length" should "return 0 for an empty list" in {
+    listLength(Nil) should be (0)
+  }
+
   "init" should "return list without last element" in {
     init(List(1, 2, 3, 4, 5)) should be (List(1, 2, 3, 4))
   }
