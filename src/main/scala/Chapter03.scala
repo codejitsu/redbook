@@ -8,6 +8,14 @@ object Chapter03 {
   case class Cons[+A](head: A, tail: List[A]) extends List[A]
 
   object List {
+    def reverse[A](l: List[A]): List[A] = foldLeft[A, List[A]](l, Nil)((r, a) => Cons[A](a, r))
+
+    def listLengthFL[A](l: List[A]): Int = foldLeft(l, 0)((x, _) => x + 1)
+
+    def productFL(l: List[Int]): Int = foldLeft(l, 1)(_ * _)
+
+    def sumFL(l: List[Int]): Int = foldLeft(l, 0)(_ + _)
+
     @tailrec
     def foldLeft[A,B](as: List[A], z: B)(f: (B, A) => B): B = as match {
       case Nil => z
