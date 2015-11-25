@@ -4,6 +4,30 @@ import redbook.Chapter03._
 import redbook.Chapter03.List._
 
 class Chapter03Test extends FlatSpec with Matchers {
+  "concat" should "concat two lists together" in {
+    concat(List(1, 2, 3), List(4, 5, 6)) should be (List(1, 2, 3, 4, 5, 6))
+  }
+
+  "concat of Nil with something" should "be something" in {
+    concat(Nil, List(1, 2, 3)) should be (List(1, 2, 3))
+  }
+
+  "concat of something with Nil" should "be something" in {
+    concat(List(1, 2, 3), Nil) should be (List(1, 2, 3))
+  }
+
+  "concat of two Nils" should "be a Nil" in {
+    concat(Nil, Nil) should be (Nil)
+  }
+
+  "appendFL" should "add a new element to the begin of a list" in {
+    appendFL(List(2, 3, 4), 1) should be (List(1, 2, 3, 4))
+  }
+
+  "appendFL" should "add a new element to the Nil" in {
+    appendFL(Nil, 1) should be (List(1))
+  }
+
   "reverse" should "return reverse order list for an nonempty list" in {
     reverse(List(1, 2, 3, 4, 5)) should be (List(5, 4, 3, 2, 1))
   }
