@@ -4,6 +4,22 @@ import redbook.Chapter03._
 import redbook.Chapter03.List._
 
 class Chapter03Test extends FlatSpec with Matchers {
+  "dToStr" should "return a list containing string representations for nonempty list" in {
+    dToStr(List(1.0, 2.0,3.0)) should be (List("1.0", "2.0", "3.0"))
+  }
+
+  "dToStr" should "return Nil for empty list" in {
+    dToStr(Nil) should be (Nil)
+  }
+
+  "plusone" should "return a list containing incremented integers for nonempty list" in {
+    plusone(List(1,2,3)) should be (List(2,3,4))
+  }
+
+  "plusone" should "return Nil for empty list" in {
+    plusone(Nil) should be (Nil)
+  }
+
   "concat" should "concat two lists together" in {
     concat(List(1, 2, 3), List(4, 5, 6)) should be (List(1, 2, 3, 4, 5, 6))
   }

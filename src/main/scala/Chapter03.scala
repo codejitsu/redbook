@@ -8,6 +8,10 @@ object Chapter03 {
   case class Cons[+A](head: A, tail: List[A]) extends List[A]
 
   object List {
+    def dToStr(l: List[Double]): List[String] = reverse(foldLeft[Double, List[String]](l, Nil)((b, a) => Cons(a.toString, b)))
+
+    def plusone(l: List[Int]): List[Int] = reverse(foldLeft[Int, List[Int]](l, Nil)((b, a) => Cons(a + 1, b)))
+
     def concat[A](first: List[A], second: List[A]): List[A] = foldRight[A, List[A]](first, second)((b, a) => Cons(b, a))
 
     def appendFL[A](l: List[A], elem: A): List[A] = reverse(foldLeft[A, List[A]](l, List(elem))((r, a) => Cons(a, r)))
