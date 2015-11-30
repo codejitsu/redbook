@@ -4,6 +4,14 @@ import redbook.Chapter03._
 import redbook.Chapter03.List._
 
 class Chapter03Test extends FlatSpec with Matchers {
+  "map" should "return mapped list for non empty list" in {
+    map[Int, String](List(1, 2, 3, 4, 5))(_.toString) should be (List("1", "2", "3", "4", "5"))
+  }
+
+  "map" should "return Nil for Nil" in {
+    map[Int, String](Nil)(_.toString) should be (Nil)
+  }
+
   "dToStr" should "return a list containing string representations for nonempty list" in {
     dToStr(List(1.0, 2.0,3.0)) should be (List("1.0", "2.0", "3.0"))
   }
