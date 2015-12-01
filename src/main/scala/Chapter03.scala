@@ -8,6 +8,11 @@ object Chapter03 {
   case class Cons[+A](head: A, tail: List[A]) extends List[A]
 
   object List {
+    def filter[A](as: List[A])(f: A => Boolean): List[A] = reverse(foldLeft[A, List[A]](as, Nil) {
+      case (b, a) if f(a) => Cons(a, b)
+      case (b, _) => b
+    })
+
     def map[A,B](as: List[A])(f: A => B): List[B] = reverse(foldLeft[A, List[B]](as, Nil)((b, a) => Cons(f(a), b)))
 
     def dToStr(l: List[Double]): List[String] = reverse(foldLeft[Double, List[String]](l, Nil)((b, a) => Cons(a.toString, b)))

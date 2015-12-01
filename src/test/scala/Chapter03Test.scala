@@ -4,6 +4,14 @@ import redbook.Chapter03._
 import redbook.Chapter03.List._
 
 class Chapter03Test extends FlatSpec with Matchers {
+  "filter odd numbers" should "remove all odd numbers from a list" in {
+    filter(List(1, 2, 3, 4, 5, 6, 7))(x => x % 2 == 0) should be (List(2, 4, 6))
+  }
+
+  "filter" should "return Nil for empty list" in {
+    filter(Nil)(x => true) should be (Nil)
+  }
+
   "map" should "return mapped list for non empty list" in {
     map[Int, String](List(1, 2, 3, 4, 5))(_.toString) should be (List("1", "2", "3", "4", "5"))
   }
