@@ -8,6 +8,9 @@ object Chapter03 {
   case class Cons[+A](head: A, tail: List[A]) extends List[A]
 
   object List {
+    def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] =
+      foldLeft[List[B], List[B]](map(as)(f), Nil)((b, a) => concat(b, a))
+
     def filter[A](as: List[A])(f: A => Boolean): List[A] = reverse(foldLeft[A, List[A]](as, Nil) {
       case (b, a) if f(a) => Cons(a, b)
       case (b, _) => b
