@@ -4,6 +4,62 @@ import redbook.Chapter03._
 import redbook.Chapter03.List._
 
 class Chapter03Test extends FlatSpec with Matchers {
+  "addZW" should "return the sum of all arguments if they are not the same length 2" in {
+    addZW(List(1, 2, 3), List(4, 5, 6, 7, 8)) should be (List(5, 7, 9, 7, 8))
+  }
+
+  "addZW" should "return the sum of all arguments if they are not the same length" in {
+    addZW(List(1, 2, 3, 7, 8), List(4, 5, 6)) should be (List(5, 7, 9, 7, 8))
+  }
+
+  "addZW" should "return the sum of all arguments if they are the same length" in {
+    addZW(List(1, 2, 3), List(4, 5, 6)) should be (List(5, 7, 9))
+  }
+
+  "addZW" should "return the second argument if the first argument is Nil" in {
+    addZW(Nil, List(1, 2, 3)) should be (List(1, 2, 3))
+  }
+
+  "addZW" should "return the first argument if the second argument is Nil" in {
+    addZW(List(1, 2, 3), Nil) should be (List(1, 2, 3))
+  }
+
+  "addZW" should "return Nil if the both arguments are Nil" in {
+    addZW(Nil, Nil) should be (Nil)
+  }
+
+  "add" should "return the sum of all arguments if they are not the same length 2" in {
+    add(List(1, 2, 3), List(4, 5, 6, 7, 8)) should be (List(5, 7, 9, 7, 8))
+  }
+
+  "add" should "return the sum of all arguments if they are not the same length" in {
+    add(List(1, 2, 3, 7, 8), List(4, 5, 6)) should be (List(5, 7, 9, 7, 8))
+  }
+
+  "add" should "return the sum of all arguments if they are the same length" in {
+    add(List(1, 2, 3), List(4, 5, 6)) should be (List(5, 7, 9))
+  }
+
+  "add" should "return the second argument if the first argument is Nil" in {
+    add(Nil, List(1, 2, 3)) should be (List(1, 2, 3))
+  }
+
+  "add" should "return the first argument if the second argument is Nil" in {
+    add(List(1, 2, 3), Nil) should be (List(1, 2, 3))
+  }
+
+  "add" should "return Nil if the both arguments are Nil" in {
+    add(Nil, Nil) should be (Nil)
+  }
+
+  "filterFM odd numbers" should "remove all odd numbers from a list" in {
+    filterFM(List(1, 2, 3, 4, 5, 6, 7))(x => x % 2 == 0) should be (List(2, 4, 6))
+  }
+
+  "filterFM" should "return Nil for empty list" in {
+    filterFM(Nil)(x => true) should be (Nil)
+  }
+
   "flatMap" should "return non empty list for an non empty list" in {
     flatMap(List(1,2,3))(i => List(i,i)) should be (List(1,1,2,2,3,3))
   }

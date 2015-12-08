@@ -8,6 +8,24 @@ object Chapter03 {
   case class Cons[+A](head: A, tail: List[A]) extends List[A]
 
   object List {
+    def addZW(first: List[Int], second: List[Int]): List[Int] = zipWith(first)(second)((a, b) => a + b)
+
+    def zipWith[A](first: List[A])(second: List[A])(f: (A, A) => A): List[A] = (first, second) match {
+      case (Nil, Nil) => Nil
+      case (Nil, _) => second
+      case (_, Nil) => first
+      case (Cons(h1, t1), Cons(h2, t2)) => Cons(f(h1, h2), zipWith(t1)(t2)(f))
+    }
+
+    def add(first: List[Int], second: List[Int]): List[Int] = (first, second) match {
+      case (Nil, Nil) => Nil
+      case (Nil, _) => second
+      case (_, Nil) => first
+      case (Cons(h1, t1), Cons(h2, t2)) => Cons(h1 + h2, add(t1, t2))
+    }
+
+    def filterFM[A](as: List[A])(f: A => Boolean): List[A] = flatMap(as)(a => if (f(a)) List(a) else Nil)
+
     def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] =
       foldLeft[List[B], List[B]](map(as)(f), Nil)((b, a) => concat(b, a))
 
