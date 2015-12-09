@@ -8,6 +8,25 @@ object Chapter03 {
   case class Cons[+A](head: A, tail: List[A]) extends List[A]
 
   object List {
+    def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = (sup, sub) match {
+      case (Nil, Nil) => true
+      case (Cons(_, _), Nil) => true
+      case (Nil, Cons(_, _)) => false
+      case (Cons(h1, t1), Cons(h2, t2)) => {
+        if (h1 != h2) hasSubsequence(t1, sub)
+        else {
+          def startsWith[B](f: List[B], s: List[B]): Boolean = (f, s) match {
+            case (_, Nil) => true
+            case (Nil, _) => false
+            case (Cons(f1, _), Cons(s1, _)) if (f1 != s1) => false
+            case (Cons(f1, ft), Cons(s1, st)) => startsWith(ft, st)
+          }
+
+          startsWith(t1, t2)
+        }
+      }
+    }
+
     def addZW(first: List[Int], second: List[Int]): List[Int] = zipWith(first)(second)((a, b) => a + b)
 
     def zipWith[A](first: List[A])(second: List[A])(f: (A, A) => A): List[A] = (first, second) match {

@@ -4,6 +4,28 @@ import redbook.Chapter03._
 import redbook.Chapter03.List._
 
 class Chapter03Test extends FlatSpec with Matchers {
+  "hasSubsequence" should "return true for second argument being subsequence of the first one" in {
+    hasSubsequence(List(1, 2, 3, 4), List(1, 2)) should be (true)
+    hasSubsequence(List(1, 2, 3, 4), List(2, 3)) should be (true)
+    hasSubsequence(List(1, 2, 3, 4), List(3, 4)) should be (true)
+    hasSubsequence(List(1, 2, 3, 4), List(4)) should be (true)
+    hasSubsequence(List(1, 2, 3, 4), List(4, 5)) should be (false)
+    hasSubsequence(List(1, 2, 3, 4), List(5)) should be (false)
+    hasSubsequence(List(1, 2, 3, 4), List(2, 3, 6)) should be (false)
+  }
+
+  "hasSubsequence" should "return false for second argument not Nil" in {
+    hasSubsequence(Nil, List(1, 2, 3)) should be (false)
+  }
+
+  "hasSubsequence" should "return true for first and second argument equal Nil" in {
+    hasSubsequence(Nil, Nil) should be (true)
+  }
+
+  "hasSubsequence" should "return true for second argument equal Nil" in {
+    hasSubsequence(List(1, 2, 3), Nil) should be (true)
+  }
+
   "addZW" should "return the sum of all arguments if they are not the same length 2" in {
     addZW(List(1, 2, 3), List(4, 5, 6, 7, 8)) should be (List(5, 7, 9, 7, 8))
   }
