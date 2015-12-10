@@ -2,8 +2,21 @@ import org.scalatest.{FlatSpec, Matchers}
 
 import redbook.Chapter03._
 import redbook.Chapter03.List._
+import redbook.Chapter03.Tree._
 
 class Chapter03Test extends FlatSpec with Matchers {
+  "size" should "retrun 7 for a tree with 4 leaves" in {
+    sizeT(Branch(Branch(Leaf("a"), Leaf("b")), Branch(Leaf("c"), Leaf("d")))) should be (7)
+  }
+
+  "size" should "retrun 3 for a node with 2 leaves" in {
+    sizeT(Branch(Leaf("a"), Leaf("b"))) should be (3)
+  }
+
+  "size" should "retrun 1 for a leaf node" in {
+    sizeT(Leaf("a")) should be (1)
+  }
+
   "hasSubsequence" should "return true for second argument being subsequence of the first one" in {
     hasSubsequence(List(1, 2, 3, 4), List(1, 2)) should be (true)
     hasSubsequence(List(1, 2, 3, 4), List(2, 3)) should be (true)

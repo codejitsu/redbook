@@ -7,6 +7,26 @@ object Chapter03 {
   case object Nil extends List[Nothing]
   case class Cons[+A](head: A, tail: List[A]) extends List[A]
 
+  sealed trait Tree[+A]
+  case class Leaf[A](value: A) extends Tree[A]
+  case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
+
+  object Tree {
+    def sizeT[A](tree: Tree[A]): Int = {
+      @tailrec
+      def size(trees: List[Tree[A]], acc: Int): Int = trees match {
+        case Nil => acc
+        case Cons(tree, ts) =>
+          tree match {
+            case Leaf(_) => size(ts, acc + 1)
+            case Branch(left, right) => size(List.appendFL(List.appendFL(ts, left), right), acc + 1)
+          }
+      }
+
+      size(List(tree), 0)
+    }
+  }
+
   object List {
     def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = (sup, sub) match {
       case (Nil, Nil) => true
