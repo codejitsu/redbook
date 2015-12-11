@@ -12,6 +12,11 @@ object Chapter03 {
   case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
 
   object Tree {
+    def maximum(tree: Tree[Int]): Int = tree match {
+      case Leaf(v) => v
+      case Branch(l, r) => maximum(l) max maximum(r)
+    }
+
     def sizeT[A](tree: Tree[A]): Int = {
       @tailrec
       def size(trees: List[Tree[A]], acc: Int): Int = trees match {

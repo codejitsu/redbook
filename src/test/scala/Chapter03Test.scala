@@ -5,15 +5,27 @@ import redbook.Chapter03.List._
 import redbook.Chapter03.Tree._
 
 class Chapter03Test extends FlatSpec with Matchers {
-  "size" should "retrun 7 for a tree with 4 leaves" in {
+  "maximum" should "return 7 for a tree with 4 leaves and values 1, 7, 1, 4" in {
+    maximum(Branch(Branch(Leaf(1), Leaf(7)), Branch(Leaf(1), Leaf(4)))) should be (7)
+  }
+
+  "maximum" should "return 2 for a node with 2 leaves and values 1, 2" in {
+    maximum(Branch(Leaf(1), Leaf(2))) should be (2)
+  }
+
+  "maximum" should "return 1 for a leaf node with value 1" in {
+    maximum(Leaf(1)) should be (1)
+  }
+
+  "size" should "return 7 for a tree with 4 leaves" in {
     sizeT(Branch(Branch(Leaf("a"), Leaf("b")), Branch(Leaf("c"), Leaf("d")))) should be (7)
   }
 
-  "size" should "retrun 3 for a node with 2 leaves" in {
+  "size" should "return 3 for a node with 2 leaves" in {
     sizeT(Branch(Leaf("a"), Leaf("b"))) should be (3)
   }
 
-  "size" should "retrun 1 for a leaf node" in {
+  "size" should "return 1 for a leaf node" in {
     sizeT(Leaf("a")) should be (1)
   }
 
