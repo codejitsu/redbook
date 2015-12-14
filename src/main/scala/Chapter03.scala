@@ -12,6 +12,11 @@ object Chapter03 {
   case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
 
   object Tree {
+    def depth(tree: Tree[Int]): Int = tree match {
+      case Leaf(_) => 0
+      case Branch(l, r) => 1 + (depth(l) max depth(r))
+    }
+
     def maximum(tree: Tree[Int]): Int = tree match {
       case Leaf(v) => v
       case Branch(l, r) => maximum(l) max maximum(r)

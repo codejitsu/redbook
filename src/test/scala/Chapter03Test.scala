@@ -5,6 +5,25 @@ import redbook.Chapter03.List._
 import redbook.Chapter03.Tree._
 
 class Chapter03Test extends FlatSpec with Matchers {
+  "depth" should "return maximal path" in {
+    depth(Branch(Branch(Leaf(1), Leaf(7)), Branch(Branch(Leaf(0), Leaf(1)), Leaf(4)))) should be (3)
+  }
+
+  "depth" should "return 2 for 3-level tree" in {
+    depth(Branch(Branch(Leaf(1), Leaf(7)), Branch(Leaf(1), Leaf(4)))) should be (2)
+  }
+
+  "depth" should "return 1 for 3 node complete tree" in {
+    depth(Branch(Leaf(1), Leaf(2))) should be (1)
+  }
+
+  "depth" should "return 0 for a leaf" in {
+    depth(Leaf(1)) should be (0)
+  }
+
+
+
+
   "maximum" should "return 7 for a tree with 4 leaves and values 1, 7, 1, 4" in {
     maximum(Branch(Branch(Leaf(1), Leaf(7)), Branch(Leaf(1), Leaf(4)))) should be (7)
   }
