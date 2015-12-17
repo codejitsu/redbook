@@ -5,6 +5,55 @@ import redbook.Chapter03.List._
 import redbook.Chapter03.Tree._
 
 class Chapter03Test extends FlatSpec with Matchers {
+  "mapF" should "handle branch nodes" in {
+    mapF(Branch(Branch(Leaf(1), Leaf(7)), Branch(Branch(Leaf(0), Leaf(1)), Leaf(4))))(_.toString) should be
+    (Branch(Branch(Leaf("1"), Leaf("7")), Branch(Branch(Leaf("0"), Leaf("1")), Leaf("4"))))
+  }
+
+  "mapF" should "handle leaf nodes" in {
+    mapF(Leaf(1))(_.toString) should be (Leaf("1"))
+  }
+
+  "depthF" should "return maximal path" in {
+    depthF(Branch(Branch(Leaf(1), Leaf(7)), Branch(Branch(Leaf(0), Leaf(1)), Leaf(4)))) should be (3)
+  }
+
+  "depthF" should "return 2 for 3-level tree" in {
+    depthF(Branch(Branch(Leaf(1), Leaf(7)), Branch(Leaf(1), Leaf(4)))) should be (2)
+  }
+
+  "depthF" should "return 1 for 3 node complete tree" in {
+    depthF(Branch(Leaf(1), Leaf(2))) should be (1)
+  }
+
+  "depthF" should "return 0 for a leaf" in {
+    depthF(Leaf(1)) should be (0)
+  }
+
+  "maximumF" should "return 7 for a tree with 4 leaves and values 1, 7, 1, 4" in {
+    maximumF(Branch(Branch(Leaf(1), Leaf(7)), Branch(Leaf(1), Leaf(4)))) should be (7)
+  }
+
+  "maximumF" should "return 2 for a node with 2 leaves and values 1, 2" in {
+    maximumF(Branch(Leaf(1), Leaf(2))) should be (2)
+  }
+
+  "maximumF" should "return 1 for a leaf node with value 1" in {
+    maximumF(Leaf(1)) should be (1)
+  }
+
+  "sizeF" should "return 7 for a tree with 4 leaves" in {
+    sizeF(Branch(Branch(Leaf("a"), Leaf("b")), Branch(Leaf("c"), Leaf("d")))) should be (7)
+  }
+
+  "sizeF" should "return 3 for a node with 2 leaves" in {
+    sizeF(Branch(Leaf("a"), Leaf("b"))) should be (3)
+  }
+
+  "sizeF" should "return 1 for a leaf node" in {
+    sizeF(Leaf("a")) should be (1)
+  }
+
   "map" should "handle branch nodes" in {
     mapT(Branch(Branch(Leaf(1), Leaf(7)), Branch(Branch(Leaf(0), Leaf(1)), Leaf(4))))(_.toString) should be
       (Branch(Branch(Leaf("1"), Leaf("7")), Branch(Branch(Leaf("0"), Leaf("1")), Leaf("4"))))

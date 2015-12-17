@@ -12,6 +12,19 @@ object Chapter03 {
   case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
 
   object Tree {
+    def mapF[A, B](tree: Tree[A])(f: A => B): Tree[B] = fold[A, Tree[B]](tree, z => Leaf(f(z)))(Branch(_, _))
+
+    def depthF(tree: Tree[Int]): Int = fold[Int, Int](tree, z => 0)((l, r) => 1 + (l max r))
+
+    def maximumF(tree: Tree[Int]): Int = fold[Int, Int](tree, z => z)(_ max _)
+
+    def sizeF[A](tree: Tree[A]): Int = fold[A, Int](tree, z => 1)(1 + _ + _)
+
+    def fold[A,B](tree: Tree[A], z: A => B)(f: (B, B) => B): B = tree match {
+      case Leaf(a) => z(a)
+      case Branch(l, r) => f(fold(l, z)(f), fold(r, z)(f))
+    }
+
     def mapT[A, B](tree: Tree[A])(f: A => B): Tree[B] = tree match {
       case Leaf(a) => Leaf(f(a))
       case Branch(l, r) => Branch(mapT(l)(f), mapT(r)(f))
